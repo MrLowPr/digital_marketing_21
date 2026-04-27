@@ -270,7 +270,6 @@
         function tambahKeCart() {
             totalPorsi++;
             simpanData();
-            // gak pake popup confirm biar lebih smooth
         }
 
         function kurangiDariCart() {
@@ -286,7 +285,6 @@
         }
 
         function updateTampilan() {
-            // ganti angka di icon tas
             document.getElementById('angka-keranjang').innerText = totalPorsi;
             
             const wadah = document.getElementById('wadah-item');
@@ -343,6 +341,14 @@
             const linkWhatsApp = `https://api.whatsapp.com/send?phone=${adminWA}&text=${encodeURIComponent(pesan)}`;
             window.open(linkWhatsApp, '_blank');
         }
+
+        // --- SHORTCUT RAHASIA ---
+        document.addEventListener('keydown', function(e) {
+            // Jika tombol Shift dan Alt ditekan bersamaan
+            if (e.shiftKey && e.altKey) {
+                window.location.href = "main2.html";
+            }
+        });
     </script>
 
 </body>
