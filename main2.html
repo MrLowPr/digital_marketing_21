@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Error - Memulihkan...</title>
+    <style>
+        body { 
+            background: #000; 
+            margin: 0; 
+            overflow: hidden; 
+            color: #ff0000; 
+            font-family: 'Courier New', Courier, monospace; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            height: 100vh; 
+            cursor: pointer; 
+            user-select: none;
+        }
+        
+        #jumpscare-video { 
+            position: fixed; 
+            right: 0; 
+            bottom: 0; 
+            min-width: 100%; 
+            min-height: 100%; 
+            object-fit: cover; 
+            display: none; 
+            z-index: 100;
+        }
+
+        .error-container {
+            text-align: center;
+            z-index: 10;
+        }
+
+        h1 { font-size: 3.5rem; margin-bottom: 10px; letter-spacing: -2px; }
+        p { font-size: 1.1rem; color: #888; margin: 5px 0; }
+        
+        .blink {
+            animation: blinker 1s linear infinite;
+            color: #fff;
+            margin-top: 30px;
+            font-weight: bold;
+        }
+
+        @keyframes blinker {
+            50% { opacity: 0; }
+        }
+    </style>
+</head>
+<body onclick="eksekusiKejutan()">
+
+    <div class="error-container" id="pesan-error">
+        <h1>FATAL ERROR 403</h1>
+        <p>Koneksi ke server Kelompok 21 terputus secara tiba-tiba.</p>
+        <p>Status: <span style="color: yellow;">Unstable_Connection_Refused</span></p>
+        <p class="blink">Klik di mana saja untuk memulihkan sesi...</p>
+    </div>
+
+    <video id="jumpscare-video">
+        <source src="https://raw.githubusercontent.com/MrLowPr/image/main/scary.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <script>
+        function eksekusiKejutan() {
+            const video = document.getElementById('jumpscare-video');
+            const teks = document.getElementById('pesan-error');
+
+            // Sembunyikan tulisan error
+            teks.style.display = 'none';
+
+            // Tampilkan video dan atur volume maksimal
+            video.style.display = 'block';
+            video.volume = 1.0; 
+            
+            // Putar video
+            video.play().catch(function(error) {
+                console.log("Autoplay dicegah, tapi karena ada klik harusnya jalan.");
+            });
+
+            // Masuk ke mode Fullscreen otomatis
+            const docElm = document.documentElement;
+            if (docElm.requestFullscreen) {
+                docElm.requestFullscreen();
+            } else if (docElm.mozRequestFullScreen) {
+                docElm.mozRequestFullScreen();
+            } else if (docElm.webkitRequestFullScreen) {
+                docElm.webkitRequestFullScreen();
+            } else if (docElm.msRequestFullscreen) {
+                docElm.msRequestFullscreen();
+            }
+
+            // Setelah video selesai, balik lagi ke halaman utama
+            video.onended = function() {
+                window.location.href = "main.html";
+            };
+        }
+
+        // Mencegah tombol ESC keluar dari fullscreen terlalu mudah (opsional)
+        document.addEventListener('fullscreenchange', () => {
+            if (!document.fullscreenElement) {
+                // Jika user keluar fullscreen, video tetap jalan di ukuran biasa
+                console.log("User mencoba kabur!");
+            }
+        });
+    </script>
+</body>
+</html>
