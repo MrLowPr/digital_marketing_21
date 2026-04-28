@@ -293,7 +293,7 @@
         function updateTampilan() {
             document.getElementById('angka-keranjang').innerText = totalPorsi;
             const wadah = document.getElementById('wadah-item');
-            const harganya = totalPorsi * 15000;
+            const harganya = totalPorsi * 10000;
 
             if(totalPorsi <= 0) {
                 wadah.innerHTML = `<div class="h-full flex flex-col items-center justify-center text-center opacity-20"><i class="fas fa-shopping-basket text-7xl mb-6"></i><p class="font-bold uppercase tracking-widest text-xs italic">Keranjang Kosong</p></div>`;
@@ -326,7 +326,7 @@
         function prosesKeWA() {
             if(totalPorsi === 0) return alert("Pilih menu Ubi-Doo-Be-Doo dulu ya!");
             const adminWA = document.getElementById('pilih-nomor').value;
-            const pesan = `Halo Admin Ubi-Doo-Be-Doo! 👋\n\nSaya tertarik pesan Es Bubur Chacha Pelanginya.\n\nDetail Pesanan:\n- Jumlah: ${totalPorsi} Porsi\n- Total: Rp ${(totalPorsi*15000).toLocaleString('id-ID')}\n\nMohon dibantu proses ya admin! Terimakasih.`;
+            const pesan = `Halo Admin Ubi-Doo-Be-Doo! 👋\n\nSaya tertarik pesan Es Bubur Chacha Pelanginya.\n\nDetail Pesanan:\n- Jumlah: ${totalPorsi} Porsi\n- Total: Rp ${(totalPorsi*10000).toLocaleString('id-ID')}\n\nMohon dibantu proses ya admin! Terimakasih.`;
             window.open(`https://api.whatsapp.com/send?phone=${adminWA}&text=${encodeURIComponent(pesan)}`, '_blank');
         }
 
